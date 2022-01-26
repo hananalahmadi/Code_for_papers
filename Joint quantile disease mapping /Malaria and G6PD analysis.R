@@ -2,7 +2,7 @@ nb <- poly2nb(map_2)
 nb2INLA("map.adj", nb)
 g <- inla.read.graph(filename = "map.adj")
 
-# The Malaria quantile only
+# The separate quantile model for malaria
 
 alpha = 0.2
 r.m <- inla(formula = map_2$M.cases ~ 1+ offset(log(map_2$M.E))+
@@ -21,7 +21,7 @@ r.m <- inla(formula = map_2$M.cases ~ 1+ offset(log(map_2$M.E))+
 
 
 
-# The G6PD qiantile only
+# The separate quantile model for g6pd
 
 alpha = 0.8
 r.d <- inla(formula = map_2$D.cases ~ 1+ offset(log(map_2$D.E))+
@@ -41,7 +41,7 @@ r.d <- inla(formula = map_2$D.cases ~ 1+ offset(log(map_2$D.E))+
 
 
 
-# The joint quantile 
+# The joint quantile model
 
 b = length(merg.data$M.cases)
 y1 = c(merg.data$M.cases , rep(NA,b))
